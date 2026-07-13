@@ -7,8 +7,8 @@
 
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
+  font-family: Public Sans, sans-serif;
+  background-color: #0032A0;
   padding: 20px;
 }
 
@@ -29,9 +29,9 @@ body {
 }
 
 h1 {
-  font-family: Verdana, sans-serif;
+  font-family: Helvetica, ;
   font-weight: bold;
-  color: #212121;
+  color: #ffffff;
 }
 
 /* Logo */
@@ -53,11 +53,11 @@ h1 {
 /* Inputs and buttons */
 input[type="date"],
 button {
-  font-family: Arial, sans-serif;
+  font-family: "DM Mono", monospace;
   font-weight: normal;
   color: #666;
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #666;
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.4;
@@ -69,9 +69,11 @@ button {
   background-color: #d3d3d3;
   color: black;
   cursor: pointer;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.2), inset -2px -2px 4px rgba(255,255,255,0.7);
 }
 button:hover {
   background-color: #bfbfbf;
+  box-shadow: inset 3px 3px 5px rgba(0,0,0,0.25), inset -3px -3px 5px rgba(255,255,255,0.7);
 }
 
 /* Stack horizontally on wider screens */
@@ -101,19 +103,41 @@ button:hover {
   flex: 1 1 100%;  /* full width by default */
   min-width: 280px;
   max-width: 500px;
-  background: white;
+  background: transparent;
   padding: 10px;
-  border-radius: 8px;
+  border: 2px solid #ffffff;
+  border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+.gallery-item h3 {
+  margin-top: 14px;
+  padding: 6px 5px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.gallery-item p {
+  margin-top: 8px;
+  padding: 0 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
 /* Three columns on wider screens */
 @media (min-width: 1000px) {
   .gallery-item {
     flex: 0 1 31%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    height: auto; /* Smooth transition for hover effect */
   }
 }
 
@@ -121,13 +145,14 @@ button:hover {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 15px;
+  display: block;
+  width: 100%;
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.gallery-item p {
-  margin-top: 10px;
-  padding: 5px;
-  font-size: 14px;
+.gallery-item:hover img {
+  transform: scale(1.05); /* Slight zoom on hover */
 }
 
 /* Placeholder content */
@@ -141,4 +166,132 @@ button:hover {
 .placeholder-icon {
   font-size: 48px;
   margin-bottom: 20px;
+}
+/* Ensure the image container has overflow hidden so the zoom stays within bounds */
+.gallery-item {
+  overflow: hidden; 
+  transition: transform 0.3s ease; /* Makes the animation smooth */
+}
+
+/* This is the class for the image itself */
+img {
+  transition: transform 0.3s ease;
+  width: 100%; /* Adjust as needed */
+  display: block;
+}
+
+/* When you hover over the item, scale the image up slightly */
+img:hover{
+  transform: scale(1.0); /* Zooms in to 110% of the original size */
+}
+
+/* Modal background (hidden by default) */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8); /* Dark semi-transparent background */
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 20px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-content,
+.modal-content * {
+  font-family: "Public Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: bold;
+}
+
+.modal-body-scroll h2,
+.modal-body-scroll p {
+  margin-top: 12px;
+}
+
+.modal-body-scroll {
+  overflow-y: auto;
+  padding-right: 12px;
+  margin-right: -8px;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #0b3d91 transparent;
+}
+
+.close-btn {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+  background-color: #0b3d91;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgba(11, 61, 145, 0.2);
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #082d6b;
+}
+
+.dm-mono-medium-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Container for the Fun Facts section */
+.fun-facts-section {
+    background-color: transparent; /* Use a clean white or very light gray background */
+    padding: 20px;
+    border-top: 2px solid #0042A6; /* Example of a professional blue accent */
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Heading style */
+.fun-facts-heading {
+    font-family: 'DM Mono', monospace;
+    font-weight: 700; /* Bold for hierarchy */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Fact text style */
+.fun-facts-text {
+    font-family: "DM Mono", monospace;
+    font-size: 16px;
+    line-height: 1.5; /* Good line height for readability */
+    color: white; /* Dark gray for better readability than pure black */
+}
+
+.iframe {
+  pointer-events: none;
 }
